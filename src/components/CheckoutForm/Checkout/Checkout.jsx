@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button } from '@material-ui/core';
-import { dbService } from '../../../fbase'
+import { Link } from 'react-router-dom';
 
 import useStyles from './styles';
 import AddressForm from '../AddressForm';
@@ -23,11 +23,11 @@ const Checkout = ({ cart, order, onCaptureCheckout, handleEmptyCart }) => {
     }
 
     const Confirmation = () => (
-        <div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             결제가 완료되었습니다.
+            <br />
         </div>
     );
-
 
     const Form = () => activeStep === 0
         ? <AddressForm next={next} />
@@ -46,7 +46,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, handleEmptyCart }) => {
                             </Step>
                         ))}
                     </Stepper>
-                    {activeStep === steps.length ? handleEmptyCart() && <Confirmation /> : <Form />}
+                  {activeStep === steps.length ? handleEmptyCart() && <Confirmation /> : <Form />}
                 </Paper>
             </main>
         </>

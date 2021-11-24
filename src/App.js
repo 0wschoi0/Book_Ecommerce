@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 //import Products from './components/Products/Products'
 //import Navbar from './components/Navbar/Navbar'
 import { firebaseInstance, dbService, storageService } from './fbase';
-import { Products, Navbar, Cart, Checkout } from './components';
+import { Products, Navbar, Cart, Checkout, Upload } from './components';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 //import { get } from 'react-hook-form';
-import { NoteTwoTone } from '@material-ui/icons';
-
 // const database = getDatabase();
 
 const App = () => {
@@ -14,18 +12,6 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [order, setOrder] = useState([]);
-
-
-  const fetchProducts = async () => {
-    const dbProducts = await dbService.collection("products").get();
-    dbProducts.forEach(document => {
-      const productObject = {
-        ...document.data(),
-        id: document.id,
-      };
-      setProducts(prev => [productObject, ...prev]);
-    });
-  }
 
   const handleAddToCart = async (productId, price) => {
     const current = dbService.collection("products").doc(productId);
@@ -96,8 +82,31 @@ const App = () => {
       });
   }
 
+  const uploadBook = async (uploading, attachment) => {
+    console.log(uploading, attachment);
+    let attachmentUrl = "";
+    const attachmentRef = storageService.ref().child(`${Date.now()}`);
+    const response = await attachmentRef.putString(attachment, "data_url");
+    attachmentUrl = await response.ref.getDownloadURL();
+
+    const bookObj = {
+     createdAt: Date.now(),
+     name: uploading.name,
+     price: uploading.price,
+     category: uploading.category,
+     url: attachmentUrl,
+   };
+    await dbService.collection("products").add(bookObj);
+  }
+
   useEffect(() => {
-    fetchProducts();
+    dbService.collection("products").onSnapshot((snapshot) => {
+      const productsArray = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setProducts(productsArray);
+    });
     dbService.collection("cart").onSnapshot((snapshot) => {
       const cartArray = snapshot.docs.map(doc => ({
         id: doc.id,
@@ -118,6 +127,7 @@ const App = () => {
           </Route>
           <Route exact path="/checkout" element={<Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout}  handleEmptyCart={handleEmptyCart} />}>
           </Route>
+          <Route exact path="/upload" element={ <Upload uploading={uploadBook} /> }></Route>
         </Routes>
       </div>
     </Router>

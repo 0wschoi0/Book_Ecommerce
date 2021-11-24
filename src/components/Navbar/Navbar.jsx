@@ -1,6 +1,7 @@
 import React from 'react'
 import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography } from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Link, useLocation } from 'react-router-dom';
 
 import logo from '../../assets/logo.png';
@@ -22,6 +23,9 @@ const Navbar = ({totalItems}) => {
           <div className={classes.grow} />
           {location.pathname == '/' && (
             <div className={classes.button}>
+              <IconButton component={Link} to="/upload" aria-label="upload product form" color="inherit">
+                <FileUploadIcon />
+              </IconButton>
               <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
                 <Badge badgeContent={totalItems} color="secondary">
                   <ShoppingCart />
