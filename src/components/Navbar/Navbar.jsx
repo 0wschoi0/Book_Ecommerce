@@ -19,6 +19,9 @@ const Navbar = ({totalItems}) => {
             <img src={logo} alt="Refurbished Books" height="25px" className={classes.image} />
             Refurbished Books
           </Typography>
+          <Typography variant="h6" className={classes.title} color="inherit">
+            13조 욕심 많은 돼지의 죽음
+          </Typography>
           <div className={classes.grow} />
           {location.pathname == '/' && (
             <div className={classes.button}>
