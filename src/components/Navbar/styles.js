@@ -13,7 +13,7 @@ export default makeStyles((theme) => ({
     background: '#f6f5f0',
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 3,
     alignItems: 'center',
     display: 'flex',
     textDecoration: 'none',
