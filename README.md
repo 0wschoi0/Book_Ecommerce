@@ -97,9 +97,6 @@ npm install react react-router-dom react-hook-form
 npm install firebase
 
 
-npm install @material-ui/core @material-ui/icons @stripe/react-stripe-js @stripe/stripe-js
-
-
 ----------------------------------------------------------------------------------------
 
 
