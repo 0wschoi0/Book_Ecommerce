@@ -32,7 +32,7 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
                     <Typography variant="h4">총 합계 : {cart.map(item=>{total += item.totalP})}₩{total}</Typography>
                     <div>
                         <Button className={classes.emptyButton} size="large" type="button" variant="contained" variant="outlined" color="secondary" startIcon={<RemoveShoppingCart />} onClick={handleEmptyCart}>장바구니 비우기</Button>
-                        <Button component={Link} to="/checkout" className={classes.checkoutButton} size="large" type="button" variant="contained" variant="outlined" color="primary">결제하기</Button>
+                        <Button component={Link} to="/checkout" className={classes.checkoutButton} size="large" type="button" variant="contained" variant="outlined" startIcon={<CreditCard />} color="primary">결제하기</Button>
 
                     </div>
             </div>
