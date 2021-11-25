@@ -16,7 +16,7 @@ const Product = ({ product, onAddToCart }) => {
             {product.name}
           </Typography>
           <Typography variant="subtitle">
-            ₩{product.price}
+            ₩ {product.price}
           </Typography>
         </div>
       </CardContent>
