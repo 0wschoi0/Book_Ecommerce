@@ -1,5 +1,6 @@
 import React from 'react'
 import { Typography, Button, Card, CardActions, CardContent, CardMedia } from '@material-ui/core'
+import { Delete, Add, Remove } from '@material-ui/icons'
 
 import useStyles from './styles';
 
@@ -14,11 +15,19 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <div className={classes.buttons}>
-                    <Button type="button" size="small" onClick={() => { item.quantity === 1 ? onRemoveFromCart(item.id) : onUpdateCartQty(item.id, -item.price, -1)}}>-</Button>
+                    <IconButton aria-label="Remove" size="large" onClick={() => { item.quantity === 1 ? onRemoveFromCart(item.id) : onUpdateCartQty(item.id, -item.price, -1)}}>
+                        <Remove />
+                    </IconButton>
                     <Typography>{item.quantity}</Typography>
-                    <Button type="button" size="small" onClick={() => onUpdateCartQty(item.id, item.price, +1)}>+</Button>
+                    <IconButton aria-label="Add" size="large" onClick={() => onUpdateCartQty(item.id, item.price, +1)}>
+                        <Add />
+                    </IconButton>
                 </div>
-                <Button variant="contained" type="button" color="secondary" onClick={() => onRemoveFromCart(item.id)}>제거하기</Button>
+                <div className={classes.buttons}>
+                    <IconButton arial-label="Delete" color="error" size="medium" onClick={() => onRemoveFromCart(item.id)}>
+                        <Delete />
+                    </IconButton>
+                </div>
             </CardActions>
         </Card>
     )
