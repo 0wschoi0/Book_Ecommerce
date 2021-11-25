@@ -94,13 +94,10 @@ HTML CSS Javascript등을 통해 여러가지 기능을 구현할 사이트의 �
 npm install react react-router-dom react-hook-form
 
 
-npm install firebase firebase-tools
+npm install firebase
 
 
 npm install @material-ui/core @material-ui/icons @chec/commerce.js @stripe/react-stripe-js @stripe/stripe-js
-
-
-react-router-dom react-hook-form
 
 
 ----------------------------------------------------------------------------------------
